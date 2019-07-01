@@ -7,7 +7,8 @@ session.headers.update({'Content-Type': 'application/json'})
 
 
 def post(teams_webhook_url, message):
-    response = session.post(teams_webhook_url, data=message)
+    byte_data = message.encode('utf-8')
+    response = session.post(teams_webhook_url, data=byte_data)
     if not response.ok or response.text is not '1':
         exception_msg = 'Error performing request to: {}.' \
                             ' Returned status code: {}.' \
